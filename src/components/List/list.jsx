@@ -13,7 +13,15 @@ import PlaceDetails from "../PlaceDetails/placeDetails.jsx"
 
 import useStyles from "./styles"
 
-const List = ({ places, childClicked, isLoading , type, setType, rating, setRating}) => {
+const List = ({
+  places,
+  childClicked,
+  isLoading,
+  type,
+  setType,
+  rating,
+  setRating,
+}) => {
   const classes = useStyles()
   const [elRefs, setElRefs] = useState([])
 
@@ -28,7 +36,13 @@ const List = ({ places, childClicked, isLoading , type, setType, rating, setRati
 
   return (
     <div className={classes.container}>
-      <Typography variant="h4">
+      <Typography
+        variant="h4"
+        color="primary"
+        style={{
+          fontWeight: "bold",
+        }}
+      >
         Restaurants, Hotels and Attaractions around you
       </Typography>
       {isLoading ? (
@@ -57,8 +71,14 @@ const List = ({ places, childClicked, isLoading , type, setType, rating, setRati
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
             {places?.map((place, i) => {
-              console.log('check1',childClicked,i, place, Number(childClicked) === i);
-              
+              console.log(
+                "check1",
+                childClicked,
+                i,
+                place,
+                Number(childClicked) === i
+              )
+
               return (
                 <Grid item key={i} xs={12}>
                   <PlaceDetails
