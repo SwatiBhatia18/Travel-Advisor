@@ -5,9 +5,16 @@ import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined"
 import Rating from "@material-ui/lab/Rating"
 
 import useStyles from "./styles"
-import mapStyles from '../../mapStyles';
+import mapStyles from "../../mapStyles"
 
-const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, weatherData }) => {
+const Map = ({
+  setCoordinates,
+  setBounds,
+  coordinates,
+  places,
+  setChildClicked,
+  weatherData,
+}) => {
   const classes = useStyles()
   const isMobile = useMediaQuery("min-width:600px")
   console.log("coordinates1", coordinates)
@@ -22,7 +29,11 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
         center={coordinates}
         defaultZoom={1}
         margin={[50, 50, 50, 50]}
-        options={{ disableDefaultUI: true, zoomControl: true, styles: mapStyles }}
+        options={{
+          disableDefaultUI: true,
+          zoomControl: true,
+          styles: mapStyles,
+        }}
         onChange={(e) => {
           console.log("checkmap", e)
           setCoordinates({ lat: e.center.lat, lng: e.center.lng })
@@ -31,8 +42,8 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
             sw: e?.marginBounds?.sw,
           })
         }}
-        onChildClick={(child)=>{
-            setChildClicked(child)
+        onChildClick={(child) => {
+          setChildClicked(child)
         }}
       >
         {places?.map((place, i) => (
@@ -67,11 +78,19 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked, 
             )}
           </div>
         ))}
-        {weatherData && 
-          <div  lat={weatherData?.coord?.lat} lng={weatherData?.coord?.lon}>
-            <img src={`http://openweathermap.org/img/wn/${weatherData?.weather?.[0]?.icon}@2x.png`} height="70px" />
+        {weatherData && (
+          <div lat={weatherData?.coord?.lat} lng={weatherData?.coord?.lon}>
+            <img
+              src={
+                weatherData?.weather?.[0]?.icon
+                  ? `http://openweathermap.org/img/wn/${weatherData?.weather?.[0]?.icon}@2x.png`
+                  : "https://uxwing.com/wp-content/themes/uxwing/download/weather/weather-icon.png"
+              }
+              alt="weather"
+              height="70px"
+            />
           </div>
-        } 
+        )}
       </GoogleMapReact>
     </div>
   )
